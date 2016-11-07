@@ -1,3 +1,4 @@
+import { FlickrImage } from './image-class';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  
+  images: FlickrImage[];
+  searchTerm: string;
+
+  constructor(){
+  }
+
+  noMatchesFound(): boolean {
+    return !(this.images && this.images.length) && Boolean(this.searchTerm);
+  }
 }

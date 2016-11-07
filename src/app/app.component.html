@@ -1,11 +1,37 @@
 <div class="main-app">
     <nav class="navbar navbar-dark bg-primary navbar-fixed-top">
          <a class="navbar-brand mb-0" href="#">FlickrSearch</a>
-           <div class="nav navbar-nav navbar-right float-sm-right "> 
-            <input type="text" class="form-control" placeholder="Search...">
+           <div class="nav navbar-nav navbar-right float-sm-right form-inline"> 
+              <label class="sr-only" for="searchInput">Search Flickr</label>
+              <div class="form-group input-group">
+                <input type="search" [(ngModel)]="searchTerm" id="searchInput" class="form-control" placeholder="Search...">
+                <i class="fa fa-search input-group-addon"></i>
+             </div>
            </div>
     </nav>
     <div class="container-fluid" >
 
+        <div *ngIf="!searchTerm" class="no-search-criteria">
+          <p class="lead text-xs-center text-muted">Please use the search bar to find an image.<br>
+          You can search by tags by using comma seperated values.</p>
+        </div>  
+        <div *ngIf="noMatchesFound()" class="no-results-message">
+          <p class="lead text-xs-center">Oops! There are no matches for search term "<strong>{{ searchTerm }}</strong>".<br>
+          Please try entering a different search criteria.</p>
+        </div>
+
+        <div class="card-columns">
+            <a *ngFor="let i of images" class="card" target="_blank" href="{{i.linkUrl}}">
+              <img class="card-img-top" src="{{i.linkUrl}}" alt="{{i.title}}">
+              <div class="card-block">
+                <h4 class="card-title">{{i.title}}</h4>
+                <p class="card-text">{{i.author}}</p>
+                <p class="card-text"><small class="text-muted">{{i.publishedDate | date:"dd/MM/yyyy"}}</small></p>
+              </div>
+              <div class="card-footer">
+                <span *ngFor="let tag of i.tags" class="tag tag-info">{{tag}}</span>
+              </div>
+            </a>
+        </div>
     </div>
 </div>
