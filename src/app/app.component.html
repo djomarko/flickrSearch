@@ -10,6 +10,7 @@
              </div>
            </div>
     </nav>
+    <div *ngIf="searching"  class="searching-indicator-div"></div>
     <div class="container-fluid" >
 
         <div *ngIf="!searchTerm" class="no-search-criteria">
@@ -36,7 +37,7 @@
             </div>
         </div>
 
-        <div *ngIf="searching"  class="searching-indicator-div"><div class="lead text-xs-center"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Searching...</div></div>
+        
 
     </div>
 </div>

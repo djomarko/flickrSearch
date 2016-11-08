@@ -1,5 +1,8 @@
+$brand-primary: #035296;
+
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import url("https://fonts.googleapis.com/css?family=Roboto|Open+Sans");
+
 
 .card-columns {
   @include media-breakpoint-up(sm) {
@@ -48,6 +51,25 @@ h4 {
      @include media-breakpoint-up(sm){
         width: 25em;
      }
+}
+
+/*-------- Searching bar ----------*/
+.searching-indicator-div {
+    height: 3px;
+    background: #428bca;
+    position: fixed;
+    animation: progressbar 2s;
+    top: 54px;
+    width: 98%;
+}
+
+@keyframes progressbar {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 98%;
+  }
 }
 
 /* ---------  Cards  ----------- */
