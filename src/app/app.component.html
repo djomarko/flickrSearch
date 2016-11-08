@@ -4,7 +4,8 @@
            <div class="nav navbar-nav navbar-right float-sm-right form-inline"> 
               <label class="sr-only" for="searchInput">Search Flickr</label>
               <div class="form-group input-group">
-                <input type="search" [(ngModel)]="searchTerm" id="searchInput" class="form-control" placeholder="Search...">
+                <input type="search" id="searchInput" class="form-control" placeholder="Search..." 
+                 (keyup)="onSearch($event.target.value)" >
                 <i class="fa fa-search input-group-addon"></i>
              </div>
            </div>
@@ -12,8 +13,8 @@
     <div class="container-fluid" >
 
         <div *ngIf="!searchTerm" class="no-search-criteria">
-          <p class="lead text-xs-center text-muted">Please use the search bar to find an image.<br>
-          You can search by tags by using comma seperated values.</p>
+          <p class="lead text-xs-center text-muted">Please use the search bar to find images.<br>
+          You can search specific images by using comma seperated values.</p>
         </div>  
         <div *ngIf="noMatchesFound()" class="no-results-message">
           <p class="lead text-xs-center">Oops! There are no matches for search term "<strong>{{ searchTerm }}</strong>".<br>
@@ -21,17 +22,21 @@
         </div>
 
         <div class="card-columns">
-            <a *ngFor="let i of images" class="card" target="_blank" href="{{i.linkUrl}}">
-              <img class="card-img-top" src="{{i.linkUrl}}" alt="{{i.title}}">
+            <div *ngFor="let i of images" class="card">
+              <a class="card-img-top" target="_blank" 
+              href="{{i.linkUrl}}" title="{{i.title}}"><img class="card-img-top" src="{{i.mediaUrl}}" alt="{{i.title}}"></a>
               <div class="card-block">
+                <p class="card-text text-xs-right date-taken"><small class="text-muted">Taken on {{i.dateTaken | date:"dd/MM/yyyy"}}</small></p>
                 <h4 class="card-title">{{i.title}}</h4>
                 <p class="card-text">{{i.author}}</p>
-                <p class="card-text"><small class="text-muted">{{i.publishedDate | date:"dd/MM/yyyy"}}</small></p>
               </div>
               <div class="card-footer">
-                <span *ngFor="let tag of i.tags" class="tag tag-info">{{tag}}</span>
+                <span class="fa fa-tag"></span> <span *ngFor="let tag of i.tags" class="tag tag-info">{{tag}}</span>
               </div>
-            </a>
+            </div>
         </div>
+
+        <div *ngIf="searching"  class="searching-indicator-div"><div class="lead text-xs-center"><i class="fa fa-circle-o-notch fa-spin fa-fw"></i> Searching...</div></div>
+
     </div>
 </div>

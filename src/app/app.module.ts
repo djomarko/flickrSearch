@@ -16,6 +16,6 @@ import { AppComponent } from './app.component';
     HttpModule
   ],
   providers: [ FlickrImgService ],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

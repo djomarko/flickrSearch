@@ -3,8 +3,9 @@
  */
 export class FlickrImage {
     linkUrl: string;
+    mediaUrl: string;
     title: string;
     author: string;
-    publishedDate: Date;
+    dateTaken: Date;
     tags: string[];
 }
