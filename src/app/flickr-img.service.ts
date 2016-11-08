@@ -8,36 +8,23 @@ import { FlickrImage } from './image-class';
 @Injectable()
 export class FlickrImgService extends Subject<FlickrImage[]> {
 
-    
-    private _remoteUrl: string;
     private remoteSearch: Subscription;
-    private _urlFormater: (term: string) => string = null;
 
     constructor(private http: Http) {
         super();
-    }
-
-    public remoteUrl(remoteUrl: string) {
-        this._remoteUrl = remoteUrl;
-        return this;
-    }
-
-    public urlFormater(urlFormater: (term: string) => string) {
-        this._urlFormater = urlFormater;
     }
 
     /**
      * search Flickr REST services
      */
     public search(term: string): void {
-        //adding crossorigin.me to remove the cross domain exceptions
+        // adding crossorigin.me to remove the cross domain exceptions
         const URL = "http://crossorigin.me/https://api.flickr.com/services/feeds/photos_public.gne";
         
         let params = new URLSearchParams();
         params.set('tags', term);
         params.set('format', 'json');
         params.set('nojsoncallback', '1');
-        params.set('per_page', '50');
         this.cancel();
 
         this.remoteSearch = this.http.get(URL, {search: params})
@@ -73,10 +60,7 @@ export class FlickrImgService extends Subject<FlickrImage[]> {
                 return null;
             })
             .subscribe();
-            
     }
-
-   
 
     /**
      * stop previous search

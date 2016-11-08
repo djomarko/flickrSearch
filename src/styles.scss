@@ -17,6 +17,13 @@
   
 }
 
+.navbar {
+   @include media-breakpoint-up(lg) {
+    padding: .5em 6em;
+   }
+}
+
+
 .main-app {
     font-family: "Open Sans",Arial,sans-serif;
     padding-top: 80px;
