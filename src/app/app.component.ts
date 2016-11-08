@@ -34,7 +34,7 @@ export class AppComponent implements OnInit, OnDestroy {
   onSearch(term?: string) {
     // delay the search, by allowing the user to enter the full
     // search term before searching
-    const delayTime = 250;
+    const delayTime = 300;
     clearTimeout(this.debounceSearch);
 
     this.debounceSearch = setTimeout(() => {
