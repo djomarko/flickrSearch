@@ -6,8 +6,7 @@ import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, OnDestroy {
   // list of images to show from flickr
