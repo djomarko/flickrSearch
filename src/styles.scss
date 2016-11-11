@@ -31,6 +31,9 @@ $brand-primary: #035296;
     font-family: "Open Sans",Arial,sans-serif;
     padding-top: 80px;
     background: #fffefe;
+    @include media-breakpoint-only(xs) {
+      padding-top: 120px;
+    }
 }
 
 h4 {
@@ -61,6 +64,9 @@ h4 {
     animation: progressbar 2s;
     top: 54px;
     width: 98%;
+    @include media-breakpoint-only(xs) {
+      top: 108px;
+    }
 }
 
 @keyframes progressbar {
