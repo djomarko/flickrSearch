@@ -99,3 +99,8 @@ img.card-img-top {
 .card-footer span {
   margin-right: 5px;
 }
+.card-footer .tag {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+}
