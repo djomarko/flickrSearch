@@ -15,11 +15,11 @@
 
         <div *ngIf="!searchTerm" class="no-search-criteria">
           <p class="lead text-xs-center text-muted">Please use the search bar to find images.<br>
-          You can search specific images by using comma seperated values.</p>
+          To refine your search, use comma separated search terms.</p>
         </div>  
         <div *ngIf="noMatchesFound()" class="no-results-message">
-          <p class="lead text-xs-center">Oops! There are no matches for search term "<strong>{{ searchTerm }}</strong>".<br>
-          Please try entering a different search criteria.</p>
+          <p class="lead text-xs-center">Oops! There are no matching images for "<strong>{{ searchTerm }}</strong>".<br>
+          Please try entering a different search term.</p>
         </div>
 
         <div class="card-columns">
