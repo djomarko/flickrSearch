@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, URLSearchParams } from '@angular/http';
+import { Jsonp, Response, URLSearchParams } from '@angular/http';
 import {Subject, Subscription} from "rxjs";
 
 import { FlickrImage } from './image-class';
@@ -10,7 +10,7 @@ export class FlickrImgService extends Subject<FlickrImage[]> {
 
     private remoteSearch: Subscription;
 
-    constructor(private http: Http) {
+    constructor(private http: Jsonp) {
         super();
     }
 
@@ -19,26 +19,18 @@ export class FlickrImgService extends Subject<FlickrImage[]> {
      */
     public search(term: string): void {
         // adding crossorigin.me to remove the cross domain exceptions
-        const URL = "http://crossorigin.me/https://api.flickr.com/services/feeds/photos_public.gne";
+        const URL = "https://api.flickr.com/services/feeds/photos_public.gne";
         
         let params = new URLSearchParams();
         params.set('tags', term);
         params.set('format', 'json');
-        params.set('nojsoncallback', '1');
+        params.set('jsoncallback', 'JSONP_CALLBACK');
         this.cancel();
 
         this.remoteSearch = this.http.get(URL, {search: params})
             .map((res: Response) => {
-                try {
-                    let r = JSON.parse(res.text().replace(/\\'/g,"'"));
-                    if(r && r.items){
-                        return r.items
-                    }
-
-                } catch(err){
-                    console.log(err);
-                }
-                 return [];
+                const items = res.json().items;
+                return items || [];
             })
             .map((data:any[]) => {
                 let images = [];
