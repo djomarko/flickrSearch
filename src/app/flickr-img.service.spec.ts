@@ -30,7 +30,7 @@ describe('Service: FlickerImgService', () => {
     expect(flService).toBeTruthy();
   }));
 
-  describe("Function: search", () => {
+  describe('Function: search', () => {
 
     function createResponse(flService: FlickrImgService, backend: MockBackend, resp: string) {
       backend.connections.subscribe(c => {
@@ -45,7 +45,8 @@ describe('Service: FlickerImgService', () => {
       return results;
     }
 
-    it('should allow for the images to be searched', inject([FlickrImgService, MockBackend], (flService: FlickrImgService, backend: MockBackend) => {
+    it('should allow for the images to be searched',
+      inject([FlickrImgService, MockBackend], (flService: FlickrImgService, backend: MockBackend) => {
       expect(flService.search).toBeDefined();
 
       let results = createResponse(flService, backend, `{
@@ -79,7 +80,8 @@ describe('Service: FlickerImgService', () => {
       expect(results.length).toBe(2);
     }));
 
-    it('should allow for a empty response to be handled', inject([FlickrImgService, MockBackend], (flService: FlickrImgService, backend: MockBackend) => {
+    it('should allow for a empty response to be handled',
+      inject([FlickrImgService, MockBackend], (flService: FlickrImgService, backend: MockBackend) => {
         let results = createResponse(flService, backend, `{
                           "title": "Uploads from everyone",
                           "link": "http://www.flickr.com/photos/",
@@ -90,7 +92,8 @@ describe('Service: FlickerImgService', () => {
         expect(results.length).toBe(0);
     }));
 
-    it('should allow for bad json to be handled', inject([FlickrImgService, MockBackend], (flService: FlickrImgService, backend: MockBackend) => {
+    it('should allow for bad json to be handled',
+      inject([FlickrImgService, MockBackend], (flService: FlickrImgService, backend: MockBackend) => {
         let results = createResponse(flService, backend, `this is not a json`);
         expect(results.length).toBeFalsy();
     }));

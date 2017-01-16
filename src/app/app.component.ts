@@ -2,7 +2,7 @@ import { FlickrImgService } from './flickr-img.service';
 import { FlickrImage } from './image-class';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,8 @@ export class AppComponent implements OnInit, OnDestroy {
   // search term that is being searched in flickr
   searchTerm: string;
 
+  debounceSearch: NodeJS.Timer;
+
   constructor(private dataService: FlickrImgService) { }
 
   public ngOnInit() {
@@ -28,8 +30,6 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  debounceSearch: NodeJS.Timer;
-  
   onSearch(term?: string) {
     // delay the search, by allowing the user to enter the full
     // search term before searching
@@ -37,9 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
     clearTimeout(this.debounceSearch);
 
     this.debounceSearch = setTimeout(() => {
-
-      if (term != null)
+      if (!term) {
         this.searchTerm = term;
+      }
       if (!this.searchTerm) {
         this.searching = false;
         this.dataService.cancel();
@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private handleError(error: any) {
     this.searching = false;
     let errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : "Server error";
+      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     if (console && console.error) {
       console.error(errMsg); // log to console 
     }
