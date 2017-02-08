@@ -18,7 +18,6 @@ export class FlickrImgService extends Subject<FlickrImage[]> {
      * search Flickr REST services
      */
     public search(term: string): void {
-        // adding crossorigin.me to remove the cross domain exceptions
         const URL = 'https://api.flickr.com/services/feeds/photos_public.gne';
         let params = new URLSearchParams();
         params.set('tags', term);

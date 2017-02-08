@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     clearTimeout(this.debounceSearch);
 
     this.debounceSearch = setTimeout(() => {
-      if (!term) {
+      if (term) {
         this.searchTerm = term;
       }
       if (!this.searchTerm) {
